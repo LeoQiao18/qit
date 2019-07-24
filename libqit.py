@@ -313,6 +313,7 @@ def kvlm_parse(raw, start=0, dct=None):
     key = raw[start:spc]
     
     # find a newline that is not followed by a space
+    end = start
     while True:
         end = raw.find(b'\n', end+1)
         if raw[end+1] != ord(' '):
@@ -330,7 +331,7 @@ def kvlm_parse(raw, start=0, dct=None):
     else:
         dct[key] = value
 
-    return kvlm_parse(raw, start=end+1, dct)
+    return kvlm_parse(raw, start=end+1, dct=dct)
 
 def kvlm_serialize(kvlm):
     ret = b""
